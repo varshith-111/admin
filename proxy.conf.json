@@ -1,0 +1,7 @@
+{
+  "/api": {
+    "target": "https://thepostnews-aycjeyh6ffbaa5dm.canadacentral-01.azurewebsites.net",
+    "secure": false,
+    "changeOrigin": true
+  }
+}
