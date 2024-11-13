@@ -2,3 +2,51 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Adjust the spacing of form fields */
+mat-form-field {
+    margin-bottom: 20px;
+  }
+  
+  /* Customize form labels */
+  .mat-form-field-label {
+    font-weight: bold;
+    color: #495057; /* Bootstrap default text color */
+  }
+  
+  /* Style buttons to match Angular Material theme */
+  button {
+    margin-top: 20px;
+  }
+  
+  /* Additional styling for better responsiveness */
+  @media (max-width: 768px) {
+    .container {
+      padding: 1px;
+    }
+  
+    mat-form-field {
+      width: 100%;
+    }
+  }
+  
+  /* Optional: Enhance the appearance of the form container */
+  .container {
+    border: 1px solid #e0e0e0; /* Light gray border */
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Form headings */
+  h2 {
+    font-family: 'Roboto', sans-serif; /* Ensure compatibility with Angular Material */
+    color: #3f51b5; /* Angular Material's primary color */
+  }
+  
+  /* Placeholder color customization */
+  ::placeholder {
+    color: #aaa;
+    opacity: 1; /* Ensure the color is fully opaque */
+  }
+  

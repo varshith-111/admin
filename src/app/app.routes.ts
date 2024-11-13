@@ -11,5 +11,20 @@ export const routes: Routes = [
     loadComponent: () => import('./components/create-article/create-article.component').then(m => m.CreateArticleComponent),
     canActivate: [AuthGuard]
   },
-  { path: '', redirectTo: '/login', pathMatch: 'full' }
+  { 
+    path: 'create-news-article', 
+    loadComponent: () => import('./components/create-news-article/create-news-article.component').then(m => m.CreateNewsArticleComponent),
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: 'home', 
+    loadComponent: () => import('./components/home/home.component').then(m => m.HomeComponent),
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: 'edit-article/:id', 
+    loadComponent: () => import('./components/create-news-article/create-news-article.component').then(m => m.CreateNewsArticleComponent),
+    canActivate: [AuthGuard]
+  },
+  { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
