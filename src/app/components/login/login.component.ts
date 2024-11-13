@@ -100,7 +100,7 @@ export class LoginComponent {
         password: this.loginForm.value.password,
       }).subscribe({
         next: () => {
-          this.router.navigate(['/create-article']);
+          this.router.navigate(['/home']);
         },
         error: (error) => {
           this.snackBar.open('Login failed: ' + error.message, 'Close', {
