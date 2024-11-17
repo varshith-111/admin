@@ -36,4 +36,12 @@ export class ArticleServiceService {
     return this.http.post<any>(`${this.apiUrl}Admin/uploadFiles/${id}`, formdata, {
     });
   }
+ 
+  editArticleById(id: string, articleData: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}Admin/updateById/${id}`, articleData, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
 }
