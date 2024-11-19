@@ -1,101 +1,127 @@
 <div class="container mt-5">
-  <button  class="btn btn-primary" (click)="home()">home</button>
-    <h2 style="text-align: center;" class="mb-4">create article</h2>
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <div class="row">
-        <div class="col-md-6 ">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Title</mat-label>
-            <input matInput formControlName="title" placeholder="Enter title">
-            <mat-error *ngIf="form.get('title')?.invalid && form.get('title')?.touched">Title is required.</mat-error>
-          </mat-form-field>
-        </div>
-        
-        <div class="col-md-6">
+  <button class="btn btn-primary" (click)="home()">home</button>
+  <h2 style="text-align: center;" class="mb-4">{{isEdit ? 'edit article' : 'create article'}}</h2>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Title</mat-label>
+          <input matInput formControlName="title" placeholder="Enter title">
+          <mat-error *ngIf="form.get('title')?.invalid && form.get('title')?.touched">Title is required.</mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- <div class="col-md-6">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Category</mat-label>
             <input matInput formControlName="category" placeholder="Enter category">
             <mat-error *ngIf="form.get('category')?.invalid && form.get('category')?.touched">Category is required.</mat-error>
           </mat-form-field>
-        </div>
-  
-        <div class="col-md-6">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Header</mat-label>
-            <input matInput formControlName="header" placeholder="Enter header">
-            <mat-error *ngIf="form.get('header')?.invalid && form.get('header')?.touched">Header is required.</mat-error>
-          </mat-form-field>
-        </div>
-  
-        <div class="col-md-6">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Meta Tags</mat-label>
-            <input matInput formControlName="metaTags" placeholder="Enter meta tags">
-            <mat-error *ngIf="form.get('metaTags')?.invalid && form.get('metaTags')?.touched">Meta Tags are required.</mat-error>
-          </mat-form-field>
-        </div>
-  
-        <div class="col-md-6">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>xEmbed</mat-label>
-            <input matInput formControlName="xEmbed" placeholder="Enter xEmbed">
-          </mat-form-field>
-        </div>
-  
-        <div class="col-md-6">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Country</mat-label>
-            <input matInput formControlName="country" placeholder="Enter country">
-            <mat-error *ngIf="form.get('country')?.invalid && form.get('country')?.touched">Country is required.</mat-error>
-          </mat-form-field>
-        </div>
-  
-        <div class="col-md-6">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>State</mat-label>
-            <input matInput formControlName="state" placeholder="Enter state">
-            <mat-error *ngIf="form.get('state')?.invalid && form.get('state')?.touched">State is required.</mat-error>
-          </mat-form-field>
-        </div>
-  
-        <div class="col-md-6">
-            <mat-form-field appearance="outline" class="w-100">
-              <mat-label>Published On</mat-label>
-              <input matInput [matDatepicker]="picker" formControlName="publishedOn">
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-              <mat-error *ngIf="form.get('publishedOn')?.invalid && form.get('publishedOn')?.touched">
-                Published date is required.
-              </mat-error>
-            </mat-form-field>
-          </div>
+        </div> -->
 
-        <div class="col-md-12">
-            <mat-form-field appearance="outline" class="w-100">
-              <mat-label>Description</mat-label>
-              <textarea matInput formControlName="description" placeholder="Enter description" style="height:150px;"></textarea>
-              <mat-error *ngIf="form.get('description')?.invalid && form.get('description')?.touched">Description is required.</mat-error>
-            </mat-form-field>
-          </div>
-
-          <div class="col-md-12">
-            <input type="file" multiple (change)="onFileSelect($event)" #fileInput>
-          </div>
-
-          <div class="preview-container" *ngIf="selectedImages.length > 0" >
-            <div *ngFor="let image of selectedImages; let i = index" class="image-wrapper">
-                <!-- <button class="remove-btn" (click)="removeImage(i)">X</button> -->
-              <img [src]="image" alt="Selected Image" class="img-preview">
-            </div>
-          </div>
-
-          <div class="preview-container" *ngIf="isEdit">
-              <img [src]="imageUrl" alt="Selected Image" style="object-fit: cover; height: 200px;">
-          </div>
-
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Category</mat-label>
+          <mat-select formControlName="category" required>
+            <mat-option *ngFor="let category of categories" [value]="category">{{ category }}</mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
-  
-      <button  mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Submit</button>
-    </form>
-  </div>
-  
+
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Header</mat-label>
+          <input matInput formControlName="header" placeholder="Enter header">
+          <mat-error *ngIf="form.get('header')?.invalid && form.get('header')?.touched">Header is required.</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Meta Tags</mat-label>
+          <input matInput formControlName="metaTags" placeholder="Enter meta tags">
+          <mat-error *ngIf="form.get('metaTags')?.invalid && form.get('metaTags')?.touched">Meta Tags are
+            required.</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>xEmbed</mat-label>
+          <input matInput formControlName="xEmbed" placeholder="Enter xEmbed">
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Country</mat-label>
+          <input matInput formControlName="country" placeholder="Enter country">
+          <mat-error *ngIf="form.get('country')?.invalid && form.get('country')?.touched">Country is
+            required.</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>State</mat-label>
+          <input matInput formControlName="state" placeholder="Enter state">
+          <mat-error *ngIf="form.get('state')?.invalid && form.get('state')?.touched">State is required.</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Published On</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="publishedOn">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="form.get('publishedOn')?.invalid && form.get('publishedOn')?.touched">
+            Published date is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- <div class="col-md-12">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description" placeholder="Enter description"
+            style="height:150px;"></textarea>
+          <mat-error *ngIf="form.get('description')?.invalid && form.get('description')?.touched">Description is
+            required.</mat-error>
+        </mat-form-field>
+      </div> -->
+
+      <div class="col-md-12">
+        <label for="description">Description</label>
+        <angular-editor 
+          formControlName="description"
+          [placeholder]="'Enter description'" 
+          [config]="editorConfig">
+        </angular-editor>
+        <mat-error *ngIf="form.get('description')?.invalid && form.get('description')?.touched">
+          Description is required.
+        </mat-error>
+      </div>
+
+      <div class="col-md-12">
+        <input type="file" multiple (change)="onFileSelect($event)" #fileInput>
+      </div>
+
+      <div class="preview-container" *ngIf="selectedImages.length > 0">
+        <div *ngFor="let image of selectedImages; let i = index" class="image-wrapper">
+          <!-- <button class="remove-btn" (click)="removeImage(i)">X</button> -->
+          <img [src]="image" alt="Selected Image" class="img-preview">
+        </div>
+      </div>
+
+      <!-- <div class="preview-container" *ngIf="isEdit">
+              <img [src]="imageUrl" alt="Selected Image" style="object-fit: cover; height: 200px;">
+          </div> -->
+
+    </div>
+
+    <button *ngIf="!isEdit" mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Submit</button>
+    <button *ngIf="isEdit" mat-raised-button color="primary" type="button" (click)="editArticle()"
+      [disabled]="form.invalid">update Article</button>
+  </form>
+</div>
