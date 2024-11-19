@@ -44,4 +44,8 @@ export class ArticleServiceService {
       })
     });
   }
+
+  getArticleByCategory(category: string){
+    return this.http.get<any>(`${this.apiUrl}Articles/GetByCategory/${category}`);
+  }
 }

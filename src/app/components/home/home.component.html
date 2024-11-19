@@ -1,23 +1,40 @@
-
 <div class="container mt-4">
-  <div style="margin-left: 1100px;">
-    <button (click)="createnew()"  class="btn btn-primary">create new article</button>
+  <div>
+    <div class="text-end mb-3">
+      <button style="float: left; margin-right: -100px;" (click)="logout()" class="btn btn-primary">logout</button>
+    </div>
   </div>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-      <div *ngFor="let item of items" class="col">
-        <div class="card h-100">
-          <img *ngIf="item.imageUrl && item.imageUrl.length > 0"  [src]="item.imageUrl[0]" class="card-img-top" alt="Image" style="object-fit: cover; height: 200px;">
-          <div class="card-body">
-            <h5 class="card-title">{{ item.title }}</h5>
-            <button class="btn btn-primary me-2" (click)="editItem(item)">
-              <i class="bi bi-pencil"></i> Edit
-            </button>
-            <button class="btn btn-danger" (click)="deleteItem(item.id)">
-              <i class="bi bi-trash"></i> Delete
-            </button>
-          </div>
+  <div style="text-align: center;">
+    <label class="dropdown-label" for="dropdown">Choose an Category:</label>
+    <select class="styled-dropdown" id="dropdown" [(ngModel)]="selectedCategory" (change)="onCategoryChange()">
+      <option *ngFor="let option of categories" [value]="option">{{ option }} </option>
+    </select>
+  </div>
+  <div class="text-end mb-3">
+    <button style="margin-top: -60px;" (click)="createnew()" class="btn btn-primary">Create New Article</button>
+  </div>
+  <div *ngIf="!items || items.length === 0" class="text-center">
+    <p>No records to show</p>
+  </div>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div *ngFor="let item of items" class="col">
+      <div class="card h-100">
+        <div class="d-flex align-items-center">
+          <img *ngIf="item.imageUrl && item.imageUrl.length > 0" [src]="item.imageUrl[0]" class="card-img-top"
+            alt="Image" style="object-fit: contain; height: 100px; width: 150px; max-width: 100%;">
+          <button class="btn btn-primary ms-auto" (click)="editItem(item)">
+            <i class="bi bi-pencil"></i>
+          </button>
+        </div>
+        <div class="d-flex align-items-center">
+          <button class="btn btn-danger btn-delete" (click)="deleteItem(item.id)">
+            <i class="bi bi-trash"></i>
+          </button>
+        </div>
+        <div class="card-body">
+          <h5>{{ item.title }}</h5>
         </div>
       </div>
     </div>
   </div>
-  
+</div>

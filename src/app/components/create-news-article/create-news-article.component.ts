@@ -13,6 +13,7 @@ import { ArticleServiceService } from '../../services/article-service.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import {categories} from '../../models/constants'
 
 @Component({
   selector: 'app-create-news-article',
@@ -82,11 +83,7 @@ export class CreateNewsArticleComponent implements OnInit {
   // ]
   }  
 
-  categories = [
-    'Politics', 'Art', 'Food', 'Fashion', 'Technology',
-    'Science', 'Health', 'Travel', 'Business', 'Entertainment',
-    'Education', 'Environment', 'Sports', 'Literature'
-  ];
+  categories = categories;
 
   form: FormGroup;
   selectedFiles: File[] = [];
