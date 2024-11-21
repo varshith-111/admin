@@ -62,7 +62,7 @@ export class HomeComponent implements OnInit {
   }
 
   getAllArticles() {
-    this.articleService.getAllArticles().subscribe((data) => {
+    this.articleService.getAllAdmin().subscribe((data) => {
       this.items = data.data;
     });
   }
@@ -71,13 +71,17 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/create-news-article']);
   }
 
+  getDataByCategory(category:string){
+    this.articleService.getDataByCategory(category).subscribe((data) => {
+      this.items = data.data;
+    });
+  }
+
   onCategoryChange() {
     if(this.selectedCategory.toLocaleLowerCase() == 'all'){
       this.getAllArticles()
     } else {
-      this.articleService.getArticleByCategory(this.selectedCategory).subscribe((data) => {
-        this.items = data.data;
-      })
+      this.getDataByCategory(this.selectedCategory);
     }
   }
 

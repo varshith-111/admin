@@ -175,7 +175,7 @@ export class CreateNewsArticleComponent implements OnInit {
           this.selectedFiles.forEach(file => {
             formData.append('files', file);
           });
-
+          console.log(response.data)
           this.articleService.uplodFilesToAirtcle(response.data.id, formData).subscribe({
             next: (response) =>{
               this.snackBar.open('Article image uploaded successfully!', 'Close', { duration: 3000 });
