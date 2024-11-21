@@ -19,12 +19,12 @@ button i {
 }
 
 .ms-auto {
-  margin-left: 10px !important;
+  margin-left: 30px !important;
   margin-top: -50px;
 }
 
 .btn-delete{
-    margin-left: 160px;
+    margin-left: 190px;
     margin-top: -50px;
 }
 
@@ -36,7 +36,7 @@ button i {
   }
 }
 
-/* Label styling */
+
 .dropdown-label {
   font-size: 16px;
   font-weight: bold;
@@ -44,7 +44,7 @@ button i {
   display: block;
 }
 
-/* Dropdown styling */
+
 .styled-dropdown {
   width: 30%;
   padding: 10px;
@@ -52,16 +52,16 @@ button i {
   border: 1px solid #ccc;
   background-color: #f9f9f9;
   font-size: 16px;
-  appearance: none; /* Removes default dropdown arrow */
-  -webkit-appearance: none; /* Safari */
-  -moz-appearance: none; /* Firefox */
+  appearance: none; 
+  -webkit-appearance: none; 
+  -moz-appearance: none; 
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23999999" viewBox="0 0 16 16"><path d="M12.146 5.354a.5.5 0 0 1 .708 0l.001.001a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L8 8.293l3.646-3.647z"/></svg>');
   background-repeat: no-repeat;
   background-position: right 10px center;
   background-size: 16px;
 }
 
-/* Hover and focus effects */
+
 .styled-dropdown:hover {
   border-color: #888;
 }
@@ -71,4 +71,10 @@ button i {
   border-color: #555;
 }
 
+.active-icon{
+  color:  rgb(85, 212, 85);
+}
 
+.deactive-icon{
+  color: #df8e8e;
+}

@@ -48,4 +48,12 @@ export class ArticleServiceService {
   getArticleByCategory(category: string){
     return this.http.get<any>(`${this.apiUrl}Articles/GetByCategory/${category}`);
   }
+
+  getAllAdmin(){
+    return this.http.get<any>(`${this.apiUrl}Admin/getall`);
+  }
+
+  getDataByCategory(category: string){
+    return this.http.get<any>(`${this.apiUrl}Admin/getallbycategory/${category}`);
+  }
 }
