@@ -5,37 +5,45 @@
 
 .card-title {
   font-size: 1.1rem;
+  text-align: center;
 }
 
 .card-img-top {
   object-fit: contain;
-  height: 150px;
-  width: auto;
+  height: 100px;
+  width: 150px;
   max-width: 100%;
+  margin: auto;
 }
 
-button i {
-  margin-right: 5px;
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  width: 150px;
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 5px;
 }
 
-.ms-auto {
-  margin-left: 30px !important;
-  margin-top: -50px;
+.icon-container {
+  margin-left: auto;
 }
 
-.btn-delete{
-    margin-left: 190px;
-    margin-top: -50px;
+.icon-container i {
+  font-size: 1.2rem;
+  line-height: 1;
+  vertical-align: middle;
 }
 
-@media (min-width: 768px) {
-  .row-cols-md-3 > * {
-      flex: 0 0 auto;
-      width: 20%;
-      height: 10%;
-  }
+.active-icon {
+  color: rgb(85, 212, 85);
 }
 
+.deactive-icon {
+  color: #df8e8e;
+}
 
 .dropdown-label {
   font-size: 16px;
@@ -44,7 +52,6 @@ button i {
   display: block;
 }
 
-
 .styled-dropdown {
   width: 30%;
   padding: 10px;
@@ -52,15 +59,14 @@ button i {
   border: 1px solid #ccc;
   background-color: #f9f9f9;
   font-size: 16px;
-  appearance: none; 
-  -webkit-appearance: none; 
-  -moz-appearance: none; 
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23999999" viewBox="0 0 16 16"><path d="M12.146 5.354a.5.5 0 0 1 .708 0l.001.001a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L8 8.293l3.646-3.647z"/></svg>');
   background-repeat: no-repeat;
   background-position: right 10px center;
   background-size: 16px;
 }
-
 
 .styled-dropdown:hover {
   border-color: #888;
@@ -71,10 +77,18 @@ button i {
   border-color: #555;
 }
 
-.active-icon{
-  color:  rgb(85, 212, 85);
+.btn-delete {
+  color: #dc3545;
 }
 
-.deactive-icon{
-  color: #df8e8e;
+
+@media (min-width: 768px) {
+  .row-cols-md-3 > * {
+      flex: 0 0 auto;
+      width: 20.33333333%;
+  }
+}
+
+.a-cusor{
+  margin-top: 20px;
 }

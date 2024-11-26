@@ -56,4 +56,8 @@ export class ArticleServiceService {
   getDataByCategory(category: string){
     return this.http.get<any>(`${this.apiUrl}Admin/getallbycategory/${category}`);
   }
+
+  updatestatus(id: string, status: boolean){
+    return this.http.get<any>(`${this.apiUrl}Admin/updatestatus/${id}/${status}`)
+  }
 }

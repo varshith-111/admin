@@ -13,7 +13,7 @@ import { ArticleServiceService } from '../../services/article-service.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AngularEditorModule } from '@kolkov/angular-editor';
-import {categories} from '../../models/constants'
+import { categories } from '../../models/constants'
 
 @Component({
   selector: 'app-create-news-article',
@@ -29,7 +29,7 @@ import {categories} from '../../models/constants'
     MatNativeDateModule,
     MatTabsModule,
     MatSelectModule,
-    AngularEditorModule 
+    AngularEditorModule
   ],
   templateUrl: './create-news-article.component.html',
   styleUrl: './create-news-article.component.scss',
@@ -52,36 +52,36 @@ export class CreateNewsArticleComponent implements OnInit {
     defaultFontName: '',
     defaultFontSize: '',
     fonts: [
-      {class: 'arial', name: 'Arial'},
-      {class: 'times-new-roman', name: 'Times New Roman'},
-      {class: 'calibri', name: 'Calibri'},
-      {class: 'comic-sans-ms', name: 'Comic Sans MS'}
+      { class: 'arial', name: 'Arial' },
+      { class: 'times-new-roman', name: 'Times New Roman' },
+      { class: 'calibri', name: 'Calibri' },
+      { class: 'comic-sans-ms', name: 'Comic Sans MS' }
     ],
     customClasses: [
-    {
-      name: 'quote',
-      class: 'quote',
-    },
-    {
-      name: 'redText',
-      class: 'redText'
-    },
-    {
-      name: 'titleText',
-      class: 'titleText',
-      tag: 'h1',
-    },
-  ],
-  uploadUrl: 'v1/image',
-  // upload: (file: File) => {  },
-  // uploadWithCredentials: false,
-  // sanitize: true,
-  // toolbarPosition: 'top',
-  // toolbarHiddenButtons: [
-  //   ['bold', 'italic'],
-  //   ['fontSize']
-  // ]
-  }  
+      {
+        name: 'quote',
+        class: 'quote',
+      },
+      {
+        name: 'redText',
+        class: 'redText'
+      },
+      {
+        name: 'titleText',
+        class: 'titleText',
+        tag: 'h1',
+      },
+    ],
+    // uploadUrl: 'v1/image',
+    // upload: (file: File) =>{ },
+    uploadWithCredentials: false,
+    sanitize: true,
+    //toolbarPosition: 'top',
+    toolbarHiddenButtons: [
+      ['bold', 'italic'],
+      ['fontSize']
+    ]
+  }
 
   categories = categories;
 
@@ -90,9 +90,9 @@ export class CreateNewsArticleComponent implements OnInit {
   selectedImage: string | ArrayBuffer | null | any = null;
   selectedImages: string[] = [];
   isEdit = false;
-  editArticleData : any;
-  imageUrl : string = '';
-  constructor(private fb: FormBuilder, private articleService: ArticleServiceService, private snackBar: MatSnackBar,private router: ActivatedRoute, private route : Router ) {
+  editArticleData: any;
+  imageUrl: string = '';
+  constructor(private fb: FormBuilder, private articleService: ArticleServiceService, private snackBar: MatSnackBar, private router: ActivatedRoute, private route: Router) {
     this.form = this.fb.group({
       title: ['', Validators.required],
       category: ['', Validators.required],
@@ -107,9 +107,9 @@ export class CreateNewsArticleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let articleId 
+    let articleId
     this.router.paramMap.subscribe(params => {
-      articleId = params.get('id'); 
+      articleId = params.get('id');
     });
     if (articleId) {
       this.isEdit = true;
@@ -127,7 +127,7 @@ export class CreateNewsArticleComponent implements OnInit {
         });
         this.editArticleData = article.data;
         this.selectedImages = article.images || [];
-        article.data.imageUrl.forEach((value : any)=>{
+        article.data.imageUrl.forEach((value: any) => {
           this.selectedImages.push(value)
 
         })
@@ -137,7 +137,7 @@ export class CreateNewsArticleComponent implements OnInit {
       console.log(this.selectedImages)
     }
   }
-  editArticle(){
+  editArticle() {
     const articleData = {
       ...this.form.value,
       publishedBy: 'admin',
@@ -146,7 +146,7 @@ export class CreateNewsArticleComponent implements OnInit {
       shardId: this.editArticleData.shardId
     };
     this.articleService.editArticleById(this.editArticleData.id, articleData).subscribe({
-      next: (response) =>{
+      next: (response) => {
         this.snackBar.open('Article updated successfully!', 'Close', { duration: 3000 });
         if (this.selectedFiles.length > 0) {
           const formData = new FormData();
@@ -154,7 +154,7 @@ export class CreateNewsArticleComponent implements OnInit {
             formData.append('files', file);
           });
           this.articleService.uplodFilesToAirtcle(this.editArticleData.id, formData).subscribe({
-            next: (response) =>{
+            next: (response) => {
               this.snackBar.open('Article image uploaded successfully!', 'Close', { duration: 3000 });
             }
           })
@@ -177,12 +177,12 @@ export class CreateNewsArticleComponent implements OnInit {
           });
           console.log(response.data)
           this.articleService.uplodFilesToAirtcle(response.data.id, formData).subscribe({
-            next: (response) =>{
+            next: (response) => {
               this.snackBar.open('Article image uploaded successfully!', 'Close', { duration: 3000 });
             }
           })
         }
-        this.form.reset(); 
+        this.form.reset();
       },
       error: (error) => {
         this.snackBar.open('Failed to create article. Please try again.', 'Close', { duration: 3000 });
@@ -192,10 +192,10 @@ export class CreateNewsArticleComponent implements OnInit {
 
   onFileSelect(event: any) {
     this.selectedFiles = Array.from(event.target.files);
-     const input = event.target as HTMLInputElement;
+    const input = event.target as HTMLInputElement;
 
     if (input.files) {
-      this.selectedImages = []; 
+      this.selectedImages = [];
       Array.from(input.files).forEach(file => {
         const reader = new FileReader();
         reader.onload = (e) => {
@@ -206,14 +206,14 @@ export class CreateNewsArticleComponent implements OnInit {
         reader.readAsDataURL(file);
       });
     }
-    
+
   }
 
   removeImage(index: number): void {
     this.selectedImages.splice(index, 1);
   }
 
-  home(){
+  home() {
     this.route.navigate(['/home']);
   }
 

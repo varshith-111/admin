@@ -85,6 +85,20 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  enableOrDisableitem(id: string, status: boolean ){
+    let itemStatus = status ? false : true;
+    this.articleService.updatestatus(id, itemStatus).subscribe({
+      next: (response) =>{
+        if(response.data){
+          this.snackBar.open('status updated successfully!', 'Close', { duration: 3000 });
+          this.getAllArticles();
+        } else{
+          this.snackBar.open('Failed to update status. Please try again.', 'Close', { duration: 3000 });
+        }
+      }
+    })
+  }
+
   logout(){
     localStorage.removeItem('token');
     this.router.navigate(['/login']);

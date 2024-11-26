@@ -1,13 +1,13 @@
 <div class="container mt-4">
   <div>
     <div class="text-end mb-3">
-      <button style="float: left; margin-right: -100px;" (click)="logout()" class="btn btn-primary">logout</button>
+      <button style="float: left; margin-right: -100px;" (click)="logout()" class="btn btn-primary">Logout</button>
     </div>
   </div>
-  <div style="text-align: center;">
-    <label class="dropdown-label" for="dropdown">Choose an Category:</label>
+  <div class="text-center mb-3">
+    <label class="dropdown-label" for="dropdown">Choose a Category:</label>
     <select class="styled-dropdown" id="dropdown" [(ngModel)]="selectedCategory" (change)="onCategoryChange()">
-      <option *ngFor="let option of categories" [value]="option">{{ option }} </option>
+      <option *ngFor="let option of categories" [value]="option">{{ option }}</option>
     </select>
   </div>
   <div class="text-end mb-3">
@@ -19,22 +19,25 @@
   <div class="row row-cols-1 row-cols-md-3 g-4">
     <div *ngFor="let item of items" class="col">
       <div class="card h-100">
-        <div class="d-flex align-items-center">
-          <img *ngIf="item.imageUrl && item.imageUrl.length > 0" [src]="item.imageUrl[0]" class="card-img-top"
-            alt="Image" style="object-fit: contain; height: 100px; width: 150px; max-width: 100%;">
-           
-          <button class="btn ms-auto" (click)="editItem(item)">
-            <i class="bi bi-pencil"></i>
-          </button>
-          <i style="margin-left: -25px;" [ngClass]="item.isActive ? 'active-icon' : 'deactive-icon'" class="bi bi-bookmark-fill"></i>
-        </div>
-        <div class="d-flex align-items-center">
-          <button class="btn btn-delete" (click)="deleteItem(item.id)">
-            <i class="bi bi-trash"></i>
-          </button>
+        <div class="d-flex justify-content-between align-items-center p-3">
+          <div class="image-container">
+            <img *ngIf="item.imageUrl && item.imageUrl.length > 0" [src]="item.imageUrl[0]" class="card-img-top"
+              alt="Image" />
+          </div>
+          <div class="icon-container d-flex align-items-center gap-2">
+            <button class="btn btn-sm" (click)="editItem(item)">
+              <i class="bi bi-pencil"></i>
+            </button>
+            <!-- <button type="button" class="btn"><i [ngClass]="item.isActive ? 'active-icon' : 'deactive-icon'" class="bi bi-bookmark-check-fill"></i></button> -->
+            <!-- <i class="fa-solid fa-bookmark"></i> -->
+            <a title="Click to {{item.isActive ? 'deactivate' : 'activate'}}" (click)="enableOrDisableitem(item.id, item.isActive)" class="a-cusor"><i  style="cursor: pointer" [ngClass]="item.isActive ? 'active-icon' : 'deactive-icon'" class="fa-solid fa-bookmark" aria-hidden="true"></i></a>
+            <button class="btn btn-sm btn-delete" (click)="deleteItem(item.id)">
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
         </div>
         <div class="card-body">
-          <h5>{{ item.title }}</h5>
+          <h5 class="card-title">{{ item.title }}</h5>
         </div>
       </div>
     </div>
