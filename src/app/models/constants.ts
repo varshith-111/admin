@@ -3,3 +3,5 @@ export const categories = [
     'Science', 'Health', 'Travel', 'Business', 'Entertainment',
     'Education', 'Environment', 'Sports', 'Literature'
   ];
+
+  export const statusList =['Yes', 'No']

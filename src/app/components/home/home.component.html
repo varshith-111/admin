@@ -18,7 +18,13 @@
   </div>
   <div class="row row-cols-1 row-cols-md-3 g-4">
     <div *ngFor="let item of items" class="col">
-      <div class="card h-100">
+      <div class="card h-100 position-relative">
+        
+        <div class="position-absolute top-0 end-0 m-2 d-flex align-items-center eye-icon-container">
+          <i class="bi bi-eye me-2"></i> 
+          <span>{{ item.numberOfViews }}</span>
+        </div>
+      
         <div class="d-flex justify-content-between align-items-center p-3">
           <div class="image-container">
             <img *ngIf="item.imageUrl && item.imageUrl.length > 0" [src]="item.imageUrl[0]" class="card-img-top"
@@ -28,10 +34,10 @@
             <button class="btn btn-sm" (click)="editItem(item)">
               <i class="bi bi-pencil"></i>
             </button>
-            <!-- <button type="button" class="btn"><i [ngClass]="item.isActive ? 'active-icon' : 'deactive-icon'" class="bi bi-bookmark-check-fill"></i></button> -->
-            <!-- <i class="fa-solid fa-bookmark"></i> -->
-            <a title="Click to {{item.isActive ? 'deactivate' : 'activate'}}" (click)="enableOrDisableitem(item.id, item.isActive)" class="a-cusor"><i  style="cursor: pointer" [ngClass]="item.isActive ? 'active-icon' : 'deactive-icon'" class="fa-solid fa-bookmark" aria-hidden="true"></i></a>
-            <button class="btn btn-sm btn-delete" (click)="deleteItem(item.id)">
+            <a title="Click to {{item.isActive ? 'deactivate' : 'activate'}}" (click)="enableOrDisableitem(item.id, item.isActive)" class="a-cusor">
+              <i style="cursor: pointer" [ngClass]="item.isActive ? 'active-icon' : 'deactive-icon'" class="fa-solid fa-bookmark" aria-hidden="true"></i>
+            </a>
+            <button class="btn btn-sm btn-delete" (click)="confirmDelete(item.id)">
               <i class="bi bi-trash"></i>
             </button>
           </div>
