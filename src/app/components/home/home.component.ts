@@ -99,6 +99,14 @@ export class HomeComponent implements OnInit {
     })
   }
 
+
+  confirmDelete(itemId: string): void {
+    const confirmation = window.confirm('Are you sure you want to delete this item?');
+    if (confirmation) {
+      this.deleteItem(itemId);
+    }
+  }
+
   logout(){
     localStorage.removeItem('token');
     this.router.navigate(['/login']);

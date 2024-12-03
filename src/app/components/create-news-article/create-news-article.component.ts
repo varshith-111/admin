@@ -14,6 +14,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { categories } from '../../models/constants'
+import { statusList } from '../../models/constants'
 
 @Component({
   selector: 'app-create-news-article',
@@ -84,6 +85,7 @@ export class CreateNewsArticleComponent implements OnInit {
   }
 
   categories = categories;
+  statuslist = statusList;
 
   form: FormGroup;
   selectedFiles: File[] = [];
@@ -96,13 +98,14 @@ export class CreateNewsArticleComponent implements OnInit {
     this.form = this.fb.group({
       title: ['', Validators.required],
       category: ['', Validators.required],
-      header: ['', Validators.required],
-      metaTags: ['', Validators.required],
+      // header: ['', Validators.required],
+      metaTags: [''],
       xEmbed: [''],
       country: ['', Validators.required],
       state: ['', Validators.required],
       description: ['', Validators.required],
-      publishedOn: [new Date(), Validators.required]
+      publishedOn: [new Date(), Validators.required],
+      status: ['', Validators.required],
     });
   }
 
@@ -117,13 +120,14 @@ export class CreateNewsArticleComponent implements OnInit {
         this.form.patchValue({
           title: article.data.title,
           category: article.data.category,
-          header: article.data.header,
+          //header: article.data.header,
           metaTags: article.data.metaTags,
           xEmbed: article.data.xEmbed,
           country: article.data.country,
           state: article.data.state,
           description: article.data.description,
-          publishedOn: new Date(article.data.publishedOn)
+          publishedOn: new Date(article.data.publishedOn),
+          status: article.data.isActive ? 'Yes' : 'No'
         });
         this.editArticleData = article.data;
         this.selectedImages = article.images || [];
