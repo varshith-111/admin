@@ -36,13 +36,32 @@ export class HomeComponent implements OnInit {
   categories = categories;
   selectedCategory: string = 'All';
   items: any[] = [];
+  totalViews = 0;
+  totalViewsForCurrentMonth = 0;
+
   constructor(private articleService: ArticleServiceService, private router: Router, private snackBar: MatSnackBar) {
 
   }
 
   ngOnInit(): void {
     this.selectedCategory = 'All'
-    this.getAllArticles()
+    this.getAllArticles();
+  }
+
+  calculateTotalViews(): void {
+    this.totalViews = this.items.reduce((sum, item) => sum + (item.numberOfViews || 0), 0);
+  }
+
+  calculateCurrentMonthViews(): void {
+    const currentMonth = new Date().getMonth(); // Get the current month (0-indexed)
+    const currentYear = new Date().getFullYear(); // Get the current year
+
+    this.totalViewsForCurrentMonth = this.items
+      .filter(item => {
+        const itemDate = new Date(item.publishedOn);
+        return itemDate.getMonth() === currentMonth && itemDate.getFullYear() === currentYear;
+      })
+      .reduce((sum, item) => sum + (item.numberOfViews || 0), 0);
   }
 
   editItem(item: any): void {
@@ -64,6 +83,8 @@ export class HomeComponent implements OnInit {
   getAllArticles() {
     this.articleService.getAllAdmin().subscribe((data) => {
       this.items = data.data;
+      this.calculateTotalViews();
+      this.calculateCurrentMonthViews();
     });
   }
 
