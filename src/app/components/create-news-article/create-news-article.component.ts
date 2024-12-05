@@ -131,14 +131,12 @@ export class CreateNewsArticleComponent implements OnInit {
         });
         this.editArticleData = article.data;
         this.selectedImages = article.images || [];
-        article.data.imageUrl.forEach((value: any) => {
+          article.data.imageUrl.forEach((value: any) => {
           this.selectedImages.push(value)
 
         })
-        console.log(this.selectedImages)
         this.convertImageUrlsToFiles(article.data.imageUrl)
       });
-      console.log(this.selectedImages)
     }
   }
   editArticle() {
@@ -147,7 +145,8 @@ export class CreateNewsArticleComponent implements OnInit {
       publishedBy: 'admin',
       imageUrl: this.selectedFiles.length ? [] : this.form.value.imageUrl,
       id: this.editArticleData.id,
-      shardId: this.editArticleData.shardId
+      shardId: this.editArticleData.shardId,
+      numberOfViews: this.editArticleData.numberOfViews,
     };
     this.articleService.editArticleById(this.editArticleData.id, articleData).subscribe({
       next: (response) => {

@@ -21,7 +21,7 @@ export class ArticleServiceService {
   }
 
   getArticleById(id: string) {
-    return this.http.get<any>(`${this.apiUrl}Articles/GetbyId/${id}`);
+    return this.http.get<any>(`${this.apiUrl}Admin/GetbyId/${id}`);
   }
 
   getAllArticles(){
